@@ -9,7 +9,7 @@ Sample application desmostrating error while running jobrunr with oracle databas
 
 ## Setup
 
-Change the database configurations [application.yml](src/main/resources/appplication.yml) with proper `url`, `username`, `password`.
+Change the database configurations [application.yml](/src/main/resources/application.yml) with proper `url`, `username`, `password`.
 
 
 ## Build
