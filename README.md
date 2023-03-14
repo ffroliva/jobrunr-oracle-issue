@@ -1,5 +1,16 @@
 # jobrunr-oracle-issue
+
 Sample application desmostrating error while running jobrunr with oracle database
+
+## Prerequisite
+
+- Java 17
+- Oracle 12
+
+## Setup
+
+Change the database configurations [application.yml](src/main/resources/appplication.yml) with proper `url`, `username`, `password`.
+
 
 ## Build
 
@@ -16,7 +27,7 @@ mvn clean install -DskipTests
 mvn spring-boot:run
 ```
 
-### From IDE
+### From your IDE
 
 Execute the `main` method from: `com.jobrunner.oracle.jobrunroracle.JobrunrOracleApplication#main`
 
