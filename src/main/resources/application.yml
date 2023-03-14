@@ -1,0 +1,88 @@
+# ======================================================================
+# SERVER CONFIGURATION
+# ======================================================================
+server:
+  port : 8182
+  # ======================================================================
+  # Server Servlet Context Path
+  # Uncomment this property a context path is required to manage the
+  # API version
+  # ======================================================================
+  #servlet:
+  #  context-path: /v1
+# ======================================================================
+# SPRING CONFIGURATION
+# ======================================================================
+spring:
+  application:
+    name: stress-testing-service
+  # ======================================================================
+  # DATASOURCE CONFIGURATION
+  # ======================================================================
+  datasource:
+    platform: oracle
+    url: jdbc:oracle:thin:@localhost:1521:ORCL
+    username: jobrunr
+    password: jobrunr
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      schema: jobrunr
+      transaction-isolation: TRANSACTION_READ_COMMITTED
+      connection-test-query: SELECT 1 FROM DUAL
+      minimum-idle: 1
+      maximum-pool-size: 10
+      idle-timeout: 10000
+      auto-commit: false
+  sql:
+    init:
+      mode: always
+  # ======================================================================
+  # JPA CONFIGURATION
+  # ======================================================================
+  jpa:
+    open-in-view: false
+    generate-ddl: true
+    show-sql: true
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    hibernate:
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+      use-new-id-generator-mappings: false
+      ddl-auto: create-drop #create, create-drop, update, validate, none
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        default-schema: public
+        hbm2ddl:
+          auto: create-drop # none, create-drop, update
+        jdbc:
+          lob:
+            non_contextual_creation: true
+          batch_size: 50
+          order_inserts: true
+          order_updates: true
+          batch_versioned_data: true
+        temp:
+          use_jdbc_metadata_defaults: false
+        globally_quoted_identifiers: true
+        globally_quoted_identifiers_skip_column_definitions: true
+        id:
+          new_generator_mappings: true
+# ======================================================================
+# JOBRUNR CONFIGURATION
+# https://www.jobrunr.io
+# ======================================================================
+org.jobrunr:
+  background-job-server:
+    enabled: true
+  database:
+    table-prefix: _jobrunr
+  dashboard:
+    enabled: true
+    port: 9182 #the port on which to start the dashboard
+  jobs:
+    default-number-of-retries: 10 #the default number of retries for a failing job
+    retry-back-off-time-seed: 3 #the default time seed for the exponential back-off policy.
